@@ -28,7 +28,7 @@ class PostsController extends Controller
         $person_id = $_COOKIE["person_id"];
         $comment = $request->comment;
         $post_id = $request->postID;
-        $comment_id = DB::table('comment')->insertGetId(["comment_message" => "$comment", "post_id" => "$post_id", "person_id" => "$person_id"]);
+        $comment_id = DB::table('comments')->insertGetId(["comment_message" => "$comment", "post_id" => "$post_id", "person_id" => "$person_id"]);
     }
 
 
@@ -43,7 +43,7 @@ class PostsController extends Controller
                 unlink($image_path);
             }
         }
-        DB::delete('DELETE FROM post WHERE id=?;', [$postId]);
+        DB::delete('DELETE FROM posts WHERE id=?;', [$postId]);
     }
 
 
@@ -53,7 +53,7 @@ class PostsController extends Controller
         $caption = $request->input('caption');
         $post_id = $request->input('id');
 
-        DB::update('UPDATE post SET caption = ?, date = ? WHERE id=?;', [$caption, $date, $post_id]);
+        DB::update('UPDATE posts SET caption = ?, date = ? WHERE id=?;', [$caption, $date, $post_id]);
 
         $imageData = DB::select('SELECT image FROM images WHERE post_id=?;', [$post_id]);
 
@@ -83,11 +83,11 @@ class PostsController extends Controller
 
     function get_post_data_through_ID($id)
     {
-        $postData = DB::select('SELECT post.caption, images.image FROM post,images WHERE post.id=images.post_id AND post.id=?;', [$id]);
+        $postData = DB::select('SELECT posts.caption, images.image FROM posts,images WHERE posts.id=images.post_id AND posts.id=?;', [$id]);
         $postData = json_decode(json_encode($postData), true);
 
         if (count($postData) == 0) {
-            $postData = DB::select('SELECT caption FROM post WHERE id=?;', [$id]);
+            $postData = DB::select('SELECT caption FROM posts WHERE id=?;', [$id]);
             $postData = json_decode(json_encode($postData), true);
         }
 
@@ -100,7 +100,7 @@ class PostsController extends Controller
         $person_id = $_COOKIE["person_id"];
         $date = date('M d, Y');
         $caption = $request->input('caption');
-        $post_id = DB::table('post')->insertGetId(["caption" => "$caption", "date" => "$date", "person_id" => "$person_id"]);
+        $post_id = DB::table('posts')->insertGetId(["caption" => "$caption", "date" => "$date", "person_id" => "$person_id"]);
 
         $quality = 60; /* Medium Quality */
         if ($request->hasFile('image')) {
@@ -120,17 +120,17 @@ class PostsController extends Controller
     function getPosts()
     {
         $postsData = DB::select("
-        SELECT post.id,post.caption,post.date,post.person_id,CONCAT(person.firstname , ' ', person.surname) AS person_name, person.profile_pic
-        FROM post,person
-        WHERE post.person_id=person.id
-        ORDER BY post.id DESC;
+        SELECT posts.id,posts.caption,posts.date,posts.person_id,CONCAT(people.firstname , ' ', people.surname) AS person_name, people.profile_pic
+        FROM posts,people
+        WHERE posts.person_id=people.id
+        ORDER BY posts.id DESC;
         ");
 
         $postsData = json_decode(json_encode($postsData), true);
         $postsData = array_map(function ($post) {
             $postId = $post["id"];
 
-            $comment_data = DB::select("SELECT CONCAT(person.firstname , ' ', person.surname) AS person_commented,comment.comment_message,comment.person_id,person.profile_pic FROM comment,person WHERE person.id=comment.person_id AND post_id=?;", [$postId]);
+            $comment_data = DB::select("SELECT CONCAT(people.firstname , ' ', people.surname) AS person_commented,comments.comment_message,comments.person_id,people.profile_pic FROM comments,people WHERE people.id=comments.person_id AND post_id=?;", [$postId]);
             $comment_data = json_decode(json_encode($comment_data), true);
 
             $likes_count = DB::select('SELECT COUNT(*)AS likes_count FROM likes WHERE post_id=?;', [$postId]);

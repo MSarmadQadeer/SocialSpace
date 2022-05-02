@@ -10,8 +10,8 @@ class ProfileController extends Controller
     function move_to_profile_through_ID($id)
     {
         $personData = DB::select("
-        SELECT id,CONCAT(person.firstname , ' ', person.surname) AS person_name, gender, profile_pic, bio
-        FROM person
+        SELECT id,CONCAT(people.firstname , ' ', people.surname) AS person_name, gender, profile_pic, bio
+        FROM people
         WHERE id=?
         ", [$id]);
         $personData = json_decode(json_encode($personData), true);
@@ -27,16 +27,16 @@ class ProfileController extends Controller
         }
 
         $personPosts =  DB::select('
-        SELECT post.id,post.caption,post.date,post.person_id, CONCAT(person.firstname , " ", person.surname) AS person_name, profile_pic
-        FROM post,person
-        WHERE post.person_id=person.id AND post.person_id=?
-        ORDER BY post.id DESC;', [$id]);
+        SELECT posts.id,posts.caption,posts.date,posts.person_id, CONCAT(people.firstname , " ", people.surname) AS person_name, profile_pic
+        FROM posts,people
+        WHERE posts.person_id=people.id AND posts.person_id=?
+        ORDER BY posts.id DESC;', [$id]);
         $personPosts = json_decode(json_encode($personPosts), true);
 
         $personPosts = array_map(function ($post) {
             $postId = $post["id"];
 
-            $comment_data = DB::select("SELECT CONCAT(person.firstname , ' ', person.surname) AS person_commented,comment.comment_message,comment.person_id,profile_pic FROM comment,person WHERE person.id=comment.person_id AND post_id=?;", [$postId]);
+            $comment_data = DB::select("SELECT CONCAT(people.firstname , ' ', people.surname) AS person_commented,comments.comment_message,comments.person_id,profile_pic FROM comments,people WHERE people.id=comments.person_id AND post_id=?;", [$postId]);
             $comment_data = json_decode(json_encode($comment_data), true);
 
             $likes_count = DB::select('SELECT COUNT(*)AS likes_count FROM likes WHERE post_id=?;', [$postId]);
@@ -74,7 +74,7 @@ class ProfileController extends Controller
     function editBio(Request $request)
     {
         $bio = $request->bio;
-        DB::update('UPDATE person SET bio = ? WHERE person.id=?;', [$bio, $_COOKIE["person_id"]]);
+        DB::update('UPDATE people SET bio = ? WHERE people.id=?;', [$bio, $_COOKIE["person_id"]]);
     }
 
 
@@ -93,14 +93,14 @@ class ProfileController extends Controller
 
         if ($upload) {
             // Delete Older Profile Image If Exists
-            $imageData = DB::select('SELECT person.profile_pic FROM person WHERE person.id=?;', [$_COOKIE["person_id"]]);
+            $imageData = DB::select('SELECT people.profile_pic FROM people WHERE people.id=?;', [$_COOKIE["person_id"]]);
             $imageData = json_decode(json_encode($imageData), true);
             $image = $imageData[0]["profile_pic"];
             if ($image) {
                 unlink($image);
             }
             // Upload new pic in database
-            DB::update('UPDATE person SET profile_pic = ? WHERE person.id=?;', [$destination, $_COOKIE["person_id"]]);
+            DB::update('UPDATE people SET profile_pic = ? WHERE people.id=?;', [$destination, $_COOKIE["person_id"]]);
             return response()->json(['status' => 1, 'msg' => 'Image has been cropped successfully.']);
         } else {
             return response()->json(['status' => 0, 'msg' => 'Something went wrong, try again later']);

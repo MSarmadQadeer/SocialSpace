@@ -9,7 +9,7 @@ class SignupController extends Controller
 {
     function verifyEmail(Request $request)
     {
-        $accountData = DB::select('SELECT * FROM account WHERE email=?', [$request->email]);
+        $accountData = DB::select('SELECT * FROM accounts WHERE email=?', [$request->email]);
         if (count($accountData) != 0) return 1;
     }
 
@@ -22,8 +22,8 @@ class SignupController extends Controller
         $password = $request->password;
         $gender = $request->gender;
 
-        $accountId = DB::table('account')->insertGetId(["email" => "$email", "password" => "$password"]);
-        $person_id = DB::table('person')->insertGetId(["firstname" => "$firstname", "surname" => "$surname", "gender" => "$gender", "account_id" => "$accountId"]);
+        $accountId = DB::table('accounts')->insertGetId(["email" => "$email", "password" => "$password"]);
+        $person_id = DB::table('people')->insertGetId(["firstname" => "$firstname", "surname" => "$surname", "gender" => "$gender", "account_id" => "$accountId"]);
 
         setcookie("person_id", $person_id, time() + (86400 * 30), "/"); // 86400 = 1 day
 
