@@ -1,0 +1,794 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam&display=swap');
+
+:root {
+    /* --site-primary-color: rgb(212, 120, 255); */
+    /* --site-primary-color: #1dd1a1; */
+    --site-primary-color: rgb(94, 207, 252) !important;
+    --site-secondary-color: rgb(37, 204, 37) !important;
+    --site-secondary-hover-color: rgb(33, 185, 33) !important;
+    --validation-color: rgb(191, 0, 255) !important;
+    --site-primary-bg-color: rgb(233, 236, 255) !important;
+    --site-body-color: rgb(102, 102, 102) !important;
+    --font-primary: 'Segoe UI', 'Roboto' !important;
+    --font-secondary: 'Quicksand', sans-serif !important;
+    --bio-font: 'Baloo Da 2', cursive !important;
+    --post-font: 'Be Vietnam', sans-serif !important;
+    --logo-font: 'Dancing Script', cursive !important;
+    --nav-box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.2) !important;
+    --post-box-shadow: 0 1.5px 4px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.noscroll{
+    overflow: hidden !important;
+}
+
+p {
+    margin: 0 !important;
+}
+
+hr {
+    margin: 0.5rem 0 !important;
+}
+
+body {
+    background-color: var(--site-primary-bg-color);
+    color: var(--site-body-color);
+    font-family: var(--font-primary);
+}
+
+.product-logo {
+    font-family: var(--logo-font);
+    color: white;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.product-logo svg {
+    height: 1.9rem !important;
+    margin-right: 0.2rem !important;
+}
+
+.product-logo svg path {
+    fill: white;
+}
+
+.dropdown-menu{
+    min-width: 7rem !important;
+    border-radius: 7px !important;
+}
+
+
+/*===========
+NAVBAR STYLES
+===========*/
+
+.header-logo:hover{
+    cursor: pointer;
+}
+
+header {
+    width: 100%;
+    background-color: var(--site-primary-color);
+    position: sticky;
+    top: 0;
+    box-shadow: var(--nav-box-shadow);
+    z-index: 5;
+}
+
+.icons {
+    height: 2.2rem;
+    width: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.active,
+.icons:hover {
+    background-color: white;
+}
+
+.active path,
+.icons:hover path {
+    fill: var(--site-primary-color) !important;
+}
+
+#home{
+    height: 1.55rem;
+}
+
+#user{
+    height: 1.1rem;
+}
+
+#plus,
+#caret-down{
+    height: 1.2rem;
+}
+
+#home,
+#user,
+#plus,
+#caret-down path {
+    fill: white;
+}
+
+.btn-group .more-icon-btn{
+    background-color: transparent;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0 !important;
+    border: none;
+}
+
+
+/*=========
+POST STYLES
+=========*/
+
+.zoom{
+    z-index: 6;
+}
+
+.dropstart .three-dot-icon-btn svg{
+    width: 1rem;
+}
+
+.dropstart .three-dot-icon-btn svg{
+    fill: rgb(121, 121, 121);
+}
+
+.dropstart .three-dot-icon-btn{
+    background-color: rgb(238, 238, 238);
+    border-radius: 50%;
+    width: 2rem; 
+    height: 2rem;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropstart .three-dot-icon-btn:hover{
+    background-color: rgb(223, 223, 223);
+}
+
+.no-posts-message{
+    font-family: var(--bio-font);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: rgb(145, 145, 145);
+}
+
+.post {
+    margin: 5px;
+    max-width: 500px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    max-height: 100%;
+    box-shadow: var(--post-box-shadow);
+}
+
+.posts-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 6px;
+}
+
+.post-owner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.post-owner div:first-child {
+    width: 50px;
+    height: 50px;
+    margin: 0.7rem;
+}
+
+.post-owner div img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.post-image-container img {
+    width: 100%;
+}
+
+.caption {
+    font-family: var(--post-font);
+    margin: 0.4rem 0.7rem;
+    /* text-align: justify; */
+}
+
+.likes-panel {
+    padding: 0.3rem 0.9rem;
+}
+
+.likes-panel-icons {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.3rem;
+}
+
+.view-comment {
+    display: flex;
+    margin: 0.4rem 0.7rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+hr {
+    margin: 0px 0.7rem;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.7rem auto;
+}
+
+.comment>div:first-child {
+    width: 45px;
+    height: 45px;
+    margin: 0.7rem;
+}
+
+.comment>div img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.comment>div:nth-child(2) {
+    background-color: rgb(240, 242, 245);
+    padding: 1rem;
+    width: 80%;
+    border-radius: 10px;
+    margin: 0rem 0.5rem;
+}
+
+.chevron {
+    padding: 0.5rem 0.8rem;
+    border-radius: 50%;
+}
+
+.chevron:hover {
+    background-color: rgb(240, 242, 245);
+}
+
+.comment-icon svg,
+.unchecked-heart svg,
+.checked-heart svg {
+    height: 1.3rem !important;
+}
+
+.chevron-down,
+.chevron-up {
+    height: 1rem !important;
+}
+
+.comment-icon svg path,
+.unchecked-heart svg path,
+.chevron-down path,
+.chevron-up path {
+    fill: rgb(126, 126, 126);
+}
+
+.checked-heart svg path {
+    fill: red;
+}
+
+.unchecked-heart,
+.checked-heart,
+.comment-icon,
+.chevron-down,
+.chevron-up
+{
+    cursor: pointer;
+}
+
+.write-comment input {
+    width: 100%;
+    padding: 0rem 0.7rem;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+.post-creation-panel,
+.post-updation-panel,
+.profile-pic-updation-panel {
+    max-width: 500px;
+    background-color: white;
+    border-radius: 7px;
+    pointer-events: all !important;
+    overscroll-behavior-y: none !important;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.post-creation-panel>div,
+.post-updation-panel>div,
+.profile-pic-updation-panel>div {
+    width: inherit;
+    height: inherit;
+    position: relative;
+    pointer-events: all !important;
+    overscroll-behavior-y: contain !important;
+}
+
+.post-creation-panel textarea,
+.post-updation-panel textarea {
+    width: 100%;
+    height: 15rem;
+    outline: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-family: var(--post-font);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.post-creation-panel textarea::placeholder,
+.post-updation-panel textarea::placeholder {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.component-header {
+    position: relative;
+}
+
+.create-post-text,
+.update-post-text,
+.profile-pic-updation-text {
+    text-align: center;
+    padding: 1rem 0rem 0.5rem 0rem;
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.profile-pic-upload-screen,
+.post-creation-screen,
+.post-updation-screen{
+    z-index: 7 !important;
+    background-color: rgba(233, 236, 255, 0.692);
+}
+
+.close-icon svg,
+.image-icon svg {
+    height: 1.5rem;
+}
+
+.close-icon {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 55%;
+    right: 15px;
+    padding: 0.3rem;
+    background: rgb(218, 218, 218);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.image-icon svg path {
+    fill: rgb(65, 179, 93);
+}
+
+.images-to-post-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgb(173, 173, 173);
+    margin: 0.5rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.images-to-post-block>div:first-child {
+    font-weight: 700;
+    font-family: var(--font-secondary);
+}
+
+.post-creation-panel .button,
+.post-updation-panel .button,
+.profile-pic-updation-panel .button {
+    background: var(--site-secondary-color);
+    padding: 0.5rem;
+    margin: 1rem 1rem;
+    text-align: center;
+    border-radius: 7px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: var(--font-secondary);
+    cursor: pointer;
+}
+
+.post-creation-panel .button:hover,
+.post-updation-panel .button:hover,
+.profile-pic-updation-panel .button:hover {
+    background: var(--site-secondary-hover-color);
+}
+
+
+/*=================
+PROFILE PAGE STYLES
+=================*/
+
+.nav-of-profile-posts {
+    position: sticky !important;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.nav-of-profile-posts::before {
+    position: absolute;
+    inset: 0;
+    background-color: white;
+    content: "";
+    z-index: -1;
+    opacity: 0.95;
+    
+}
+
+.view-profile-image,
+.profile-img-container{
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 170px;
+    height: 170px;
+}
+
+.view-profile-image label,
+.profile-img-container label{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.profile-pic {
+    width: inherit;
+    position: absolute;
+    z-index: 3 !important;
+}
+
+.camera-svg-container{
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(61, 61, 60, 0.733);
+    padding: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.camera-svg-container svg path{
+    fill: white;
+}
+
+.profile-page-container {
+    overflow-x: hidden !important;
+    z-index: 1;
+    overscroll-behavior-y: contain;
+}
+
+.profile-page-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.profile-page-container::-webkit-scrollbar-thumb {
+    width: 6px;
+    background-color: rgb(187, 187, 187);
+    border-radius: 5px;
+}
+
+.profile-user-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: var(--font-secondary);
+    padding: 1rem 0rem;
+    text-align: center;
+}
+
+.person-name{
+    font-weight: 600;
+    font-family: var(--font-secondary);
+}
+
+.person-name:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.bio-text {
+    font-family: var(--bio-font);
+    font-size: 1.15rem;
+    line-height: 1.8rem;
+    text-align: center;
+    margin: 1rem 0rem !important;
+    max-width: 500px;
+    width: inherit;
+}
+
+.bio {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bio textarea {
+    width: 100%;
+    height: 7rem;
+    border-radius: 5px;
+    outline-color: var(--validation-color);
+    /* outline-color: rgb(37, 204, 37); */
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+}
+
+.bio-length-checker{
+    color: var(--validation-color);
+    font-family: var(--font-primary);
+    font-weight: bold;
+}
+
+.edit-and-save-bio-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-bio-btn,
+.save-bio-btn {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: 0.7rem !important;
+    cursor: pointer;
+    padding: 0.2rem 0.7rem;
+    border-radius: 7px;
+    border: 2px solid var(--site-body-color);
+}
+
+
+/* ====================
+Log In / Sign Up Screen
+==================== */
+
+.product-logo-nav{
+    background-color: var(--site-primary-color);
+}
+
+.product-logo-panel{
+    background-color: var(--site-primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-logo-panel .logo-icon svg path{
+    fill: white;
+}
+
+.product-logo-panel .logo-text{
+    font-family: var(--logo-font);
+    color: white;
+    font-weight: 700;
+    padding-top: 2rem;  
+}
+
+.login-signup-form-panel {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    /* Height calculated in JavaScript */
+    /* Width set through bootstrap */
+}
+
+.form-screen{
+    position: relative;
+    height: 100%;
+    width: 100%; 
+}
+
+.login-form,
+.signup-form{
+    position: absolute;
+    inset: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.form-holder{
+    position: relative;
+    width: 500px;
+    height: fit-content;
+    margin: auto;
+    background-color: white;
+    border-radius: 7px;
+    padding: 1rem;
+}
+
+.login-form .form-holder{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-holder input {
+    border-radius: 5px;
+    border: 1px solid var(--site-primary-bg-color);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    outline-color: var(--site-primary-color);
+}
+
+.form-holder input[type=password],
+.form-holder input[name=email],
+.form-holder input[type=text]{
+    width: 100%;
+}
+
+.fullname div {
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.genders-panel {
+    display: flex;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+.genders-panel .gender {
+    position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.genders-panel .gender label {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 7px;
+    border: 1px solid var(--site-primary-bg-color);
+    color: #6c757d;
+}
+
+.genders-panel .gender input {
+    position: absolute;
+    right: 10px;
+    margin: 0 !important;
+}
+
+.login-form hr {
+    margin: 1rem 0rem !important;
+}
+
+.login-btn,
+.create-account-btn,
+.login-signup-btns button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px !important;
+    border: none;
+    background-color: var(--site-primary-color);
+    color: white;
+    font-weight: 500;
+    letter-spacing: .5px;
+}
+
+.login-signup-btns>button:first-child ,
+.create-account-btn{
+    background-color: var(--site-secondary-color) !important;
+}
+
+.create-account-btn {
+    margin: auto;
+}
+
+.login-signup-btns {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
+.login-signup-btns button {
+    flex: 1 0 auto;
+}
+
+.validation-text{
+    font-size: 0.9rem;
+    color: var(--validation-color);
+}
+
+.formfield-identification-text{
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #6c757d;
+}
+
+.validation-text,
+.formfield-identification-text{
+    padding-bottom: 0.1rem;
+}
+
+/*===========
+MEDIA QUERIES
+===========*/
+@media (max-width: 350px) {
+    .genders-panel {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-holder{
+        width: 100% !important;
+    }
+    .login-form .form-holder{
+        width: 300px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    /* =================
+    Medium Screen Styles
+    ================= */
+    .product-logo-panel .logo-icon svg{
+        height: 8rem !important;
+    }
+    .product-logo-panel .logo-text{ 
+        font-size: 4rem;
+    }
+}
+
+@media (min-width: 992px) {
+    /* =================
+    Large Screen Styles
+    ================= */
+    .product-logo-panel .logo-icon svg{
+        height: 10rem !important;
+    }
+    .product-logo-panel .logo-text{ 
+        font-size: 4.5rem;
+    }
+}
