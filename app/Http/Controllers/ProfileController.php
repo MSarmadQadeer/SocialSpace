@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Like;
+use App\Models\Comment;
+use App\Models\Image;
+use App\Models\Post;
+use App\Models\Person;
 
 class ProfileController extends Controller
 {
     function move_to_profile_through_ID($id)
     {
-        $personData = DB::select("
-        SELECT id,CONCAT(people.firstname , ' ', people.surname) AS person_name, gender, profile_pic, bio
-        FROM people
-        WHERE id=?
-        ", [$id]);
+        $personData = Person::where('id', '=', $id)
+            ->get([
+                'id', DB::raw("CONCAT(people.firstname , ' ', people.surname) AS person_name"),
+                'gender', 'profile_pic', 'bio'
+            ]);
         $personData = json_decode(json_encode($personData), true);
 
         if (isset($_COOKIE["person_id"])) {
@@ -26,26 +31,36 @@ class ProfileController extends Controller
             $personData[0] += ["owner" => 0];
         }
 
-        $personPosts =  DB::select('
-        SELECT posts.id,posts.caption,posts.date,posts.person_id, CONCAT(people.firstname , " ", people.surname) AS person_name, profile_pic
-        FROM posts,people
-        WHERE posts.person_id=people.id AND posts.person_id=?
-        ORDER BY posts.id DESC;', [$id]);
+        $personPosts = Post::join('people', 'posts.person_id', '=', 'people.id')
+            ->where('posts.person_id', '=', $id)
+            ->orderBy('posts.id', 'DESC')
+            ->get([
+                'posts.id', 'posts.caption', 'posts.date', 'posts.person_id',
+                DB::raw("CONCAT(people.firstname , ' ', people.surname) AS person_name"),
+                'people.profile_pic'
+            ]);
         $personPosts = json_decode(json_encode($personPosts), true);
 
         $personPosts = array_map(function ($post) {
             $postId = $post["id"];
 
-            $comment_data = DB::select("SELECT CONCAT(people.firstname , ' ', people.surname) AS person_commented,comments.comment_message,comments.person_id,profile_pic FROM comments,people WHERE people.id=comments.person_id AND post_id=?;", [$postId]);
+            $comment_data = Comment::join('people', 'people.id', '=', 'comments.person_id')
+                ->where('post_id', '=', $postId)
+                ->get([
+                    DB::raw("CONCAT(people.firstname , ' ', people.surname) AS person_commented"),
+                    'comments.comment_message', 'comments.person_id', 'people.profile_pic'
+                ]);
             $comment_data = json_decode(json_encode($comment_data), true);
 
-            $likes_count = DB::select('SELECT COUNT(*)AS likes_count FROM likes WHERE post_id=?;', [$postId]);
+            $likes_count = Like::where('post_id', '=', $postId)->count();
             $likes_count = json_decode(json_encode($likes_count), true);
 
             if (isset($_COOKIE["person_id"])) {
-                $current_person_liked = DB::select('SELECT COUNT(*)AS liked FROM likes WHERE post_id=? AND person_id=?;', [$postId, $_COOKIE["person_id"]]);
+                $current_person_liked = Like::where('post_id', '=', $postId)
+                    ->where('person_id', '=', $_COOKIE["person_id"])
+                    ->count();
                 $current_person_liked = json_decode(json_encode($current_person_liked), true);
-                $post += ["current_person_liked" => $current_person_liked[0]["liked"]];
+                $post += ["current_person_liked" => $current_person_liked];
 
                 if ($post["person_id"] == $_COOKIE["person_id"]) {
                     $post += ["own" => 1];
@@ -57,11 +72,11 @@ class ProfileController extends Controller
                 $post += ["own" => 0];
             }
 
-            $images = DB::select('SELECT image FROM images WHERE post_id=?;', [$postId]);
+            $images = Image::where('post_id', '=', $postId)->get(['image']);
             $images = json_decode(json_encode($images), true);
 
             $post += ["comments" => $comment_data];
-            $post += ["likes_count" => $likes_count[0]["likes_count"]];
+            $post += ["likes_count" => $likes_count];
             $post += ["images" => $images];
 
             return $post;
@@ -73,8 +88,9 @@ class ProfileController extends Controller
 
     function editBio(Request $request)
     {
-        $bio = $request->bio;
-        DB::update('UPDATE people SET bio = ? WHERE people.id=?;', [$bio, $_COOKIE["person_id"]]);
+        $person = Person::find($_COOKIE["person_id"]);
+        $person->bio = $request->bio;
+        $person->save();
     }
 
 
@@ -93,14 +109,16 @@ class ProfileController extends Controller
 
         if ($upload) {
             // Delete Older Profile Image If Exists
-            $imageData = DB::select('SELECT people.profile_pic FROM people WHERE people.id=?;', [$_COOKIE["person_id"]]);
+            $imageData = Person::where('id', '=', $_COOKIE["person_id"])->get(['profile_pic']);
             $imageData = json_decode(json_encode($imageData), true);
             $image = $imageData[0]["profile_pic"];
             if ($image) {
                 unlink($image);
             }
             // Upload new pic in database
-            DB::update('UPDATE people SET profile_pic = ? WHERE people.id=?;', [$destination, $_COOKIE["person_id"]]);
+            $person = Person::find($_COOKIE["person_id"]);
+            $person->profile_pic = $destination;
+            $person->save();
             return response()->json(['status' => 1, 'msg' => 'Image has been cropped successfully.']);
         } else {
             return response()->json(['status' => 0, 'msg' => 'Something went wrong, try again later']);

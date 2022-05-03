@@ -3,29 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Account;
+use App\Models\Person;
 
 class SignupController extends Controller
 {
     function verifyEmail(Request $request)
     {
-        $accountData = DB::select('SELECT * FROM accounts WHERE email=?', [$request->email]);
+        $accountData = Account::where('email', '=', $request->email)->get();
         if (count($accountData) != 0) return 1;
     }
 
 
     function createAccount(Request $request)
     {
-        $firstname = $request->firstname;
-        $surname = $request->surname;
-        $email = $request->email;
-        $password = $request->password;
-        $gender = $request->gender;
+        $account = new Account;
+        $account->email = $request->email;
+        $account->password = $request->password;
+        $account->save();
 
-        $accountId = DB::table('accounts')->insertGetId(["email" => "$email", "password" => "$password"]);
-        $person_id = DB::table('people')->insertGetId(["firstname" => "$firstname", "surname" => "$surname", "gender" => "$gender", "account_id" => "$accountId"]);
+        $person = new Person;
+        $person->firstname = $request->firstname;
+        $person->surname = $request->surname;
+        $person->gender = $request->gender;
+        $person->account_id = $account->id;
+        $person->save();
 
-        setcookie("person_id", $person_id, time() + (86400 * 30), "/"); // 86400 = 1 day
+        setcookie("person_id", $person->id, time() + (86400 * 30), "/"); // 86400 = 1 day
 
         return redirect('/home');
     }
