@@ -52,7 +52,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end mt-2">
                         <!-- Dropdown menu links -->
-                        <li class="developer-profile"><a class="dropdown-item" href="#">Developer's Profile</a></li>
+                        <!-- <li class="developer-profile"><a class="dropdown-item" href="#">Developer's Profile</a></li> -->
                         <li class="log-out"><a class="dropdown-item" href="#">Log Out</a></li>
                     </ul>
                 </div>

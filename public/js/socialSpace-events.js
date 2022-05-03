@@ -80,9 +80,9 @@ window.addEventListener("click", async (e) => {
         window.location = '/login';
     }
 
-    else if (e.target.closest(".developer-profile")) {
-        window.location = `/profile-${1}`;
-    }
+    // else if (e.target.closest(".developer-profile")) {
+    //     window.location = `/profile-${1}`;
+    // }
 
     else if (e.target.closest(".person-name")) {
         window.location = `/profile-${e.target.closest(".person-name").dataset.personId}`;
