@@ -117,6 +117,12 @@ class PostsController extends Controller
 
         $quality = 60; /* Medium Quality */
         if ($request->hasFile('image')) {
+            // This creates a folder if the folder does not exist
+            $path = 'post-pics';
+            if(!is_dir($path)) {
+                mkdir($path, 0755, true);
+            }
+
             $pic = $request->file('image');
             $picName = time() . "-PID=" . $_COOKIE["person_id"] . "__" . $pic->getClientOriginalName();
             $img = \Image::make($pic);

@@ -96,6 +96,12 @@ class ProfileController extends Controller
 
     function uploadProfileImg(Request $request)
     {
+        // This creates a folder if the folder does not exist
+        $path = 'profile-pics';
+        if(!is_dir($path)) {
+            mkdir($path, 0755, true);
+        }
+
         $image = $request->image;
 
         list($type, $image) = explode(';', $image);
