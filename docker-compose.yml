@@ -15,7 +15,7 @@ services:
       MYSQL_PASSWORD: socialspace
 
   app:
-    image: socialspace
+    image: msarmadqadeer/socialspace:latest
     container_name: app
     depends_on:
       - mysql
