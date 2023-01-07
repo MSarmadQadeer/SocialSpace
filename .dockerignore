@@ -31,3 +31,4 @@ docker-compose.yml
 run
 run.ps1
 /mysql
+Jenkinsfile
