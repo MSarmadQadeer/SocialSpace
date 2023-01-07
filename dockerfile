@@ -14,6 +14,6 @@ COPY . .
 
 RUN composer install
 
-RUN cp .env.example .env
+RUN cp .env.docker-example .env
 
 RUN php artisan key:generate
