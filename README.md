@@ -33,6 +33,22 @@ php artisan migrate
 php artisan serve
 ```
 
+## :whale: Running through Docker
+
+1. Download and Install **Docker**
+2. Run the following commands:
+
+```shell
+git clone https://github.com/MSarmadQadeer/SocialSpace.git
+cd SocialSpace
+cp .env.docker-example .env
+docker-compose up -d
+```
+
+## For Jenkins
+
+You also need to specify your Docker Hub username and password as environment variables in your Jenkins instance, using the **DOCKER_HUB_USERNAME** and **DOCKER_HUB_PASSWORD** variables respectively.
+
 ## :camera_flash: Screens
 
 ### Login Screen
@@ -97,6 +113,17 @@ php artisan serve
 
 ❗ Delete Account
 
+## 🙌 Contribution Guidelines
+
+We welcome contributions from the community. To submit a pull request:
+
+1. Fork the repository.
+2. Clone the forked repository.
+3. Create a new branch for your contribution.
+4. Make the changes.
+5. Commit and push the changes to your forked repository.
+6. Create a pull request.
+
 ## 🔑 License
 
 -   This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
@@ -113,4 +140,4 @@ You can also follow my GitHub Profile to stay updated about my latest projects:
 
 If you liked the repo then kindly support it by giving it a star ⭐!
 
-Copyright (c) 2022 MUHAMMAD SARMAD QADEER
+Copyright (c) 2023 MUHAMMAD SARMAD QADEER
