@@ -1,5 +1,6 @@
 <h1 align="center" style="font-size: 52px;" ><img height=30 src="./images-for-README/dove.png"> SocialSpace - A Social Media Platform</h1>
-It is a social media website that has been created using Laravel. It has the implementation of some basic social media functionalities like creating posts, liking posts, commenting on posts, etc.
+
+This is a full-stack web application that functions as a social media platform. The application includes key social media features, enabling users to create, like, and comment on posts. The aim is to provide a user-friendly and engaging platform where individuals can share their thoughts, interact with others, and stay connected. Each feature is designed with an emphasis on ease of use, promoting a seamless social media experience.
 
 <br/>
 <br/>
@@ -8,32 +9,52 @@ It is a social media website that has been created using Laravel. It has the imp
 
 ## 🛠 Installation & Set Up
 
-1. Download and Install **xampp**
-2. Set PHP path
-3. Download and install **Composer**
-4. Run the following commands:
+1. Clone the Repository
 
 ```shell
 git clone https://github.com/MSarmadQadeer/SocialSpace.git
+```
+
+2. Install Composer Dependencies
+
+```shell
 cd SocialSpace
 composer install
+```
+
+3. Create a .env File
+
+```shell
 cp .env.example .env
+```
+
+4. Generate an App Key
+
+```shell
 php artisan key:generate
 ```
 
-5. Create a Database of name **socialspace** and run the following command:
+5. Create an empty database
+
+-   Create an empty database of name **socialspace** or any other name you want, using the database tool you prefer.
+
+6. Configure your .env File
+
+-   Open the **.env** file in your editor and set the **DB_HOST**, **DB_PORT**, **DB_DATABASE**, **DB_USERNAME**, and **DB_PASSWORD** environment variables to match the credentials of the database you just created.
+
+7. Migrate the Database
 
 ```shell
 php artisan migrate
 ```
 
-6. Run it by executing:
+8. Run the Project
 
 ```shell
 php artisan serve
 ```
 
-## :whale: Running through Docker
+## :whale: Docker Installation & Set Up
 
 1. Download and Install **Docker**
 2. Run the following commands:
@@ -47,39 +68,20 @@ docker-compose up -d
 
 ## For Jenkins
 
-You also need to specify your Docker Hub username and password as environment variables in your Jenkins instance, using the **DOCKER_HUB_USERNAME** and **DOCKER_HUB_PASSWORD** variables respectively.
+You need to specify your Docker Hub username and password as environment variables in your Jenkins instance, using the **DOCKER_HUB_USERNAME** and **DOCKER_HUB_PASSWORD** variables respectively.
 
-## :camera_flash: Screens
+## :camera_flash: Project Showcase
 
-### Login Screen
+### 📱 Mobile View
 
-![](./images-for-README/desktop/login.png)
+![](./images-for-README/mobile/mobile-showcase.png)
 
-### Signup Screen
-
-![](./images-for-README/desktop/signup.png)
-
-### Home Screen
-
-![](./images-for-README/desktop/home.png)
-
-### Profile Screen
-
-![](./images-for-README/desktop/profile.png)
-
-### Create Post
-
-![](./images-for-README/desktop/create-post.png)
-
-### Edit or Delete your Post
-
-![](./images-for-README/desktop/edit-delete.png)
-
-### Upload Profile Pic
+### 🖥 Desktop View
 
 ![](./images-for-README/desktop/upload-profile-pic.png)
-
-<img src="./images-for-README/mobile/login.png" width=180> <img src="./images-for-README/mobile/signup.png" width=180> <img src="./images-for-README/mobile/home.png" width=180> <img src="./images-for-README/mobile/profile.png" width=180> <img src="./images-for-README/mobile/create-post.png" width=180> <img src="./images-for-README/mobile/edit-delete.png" width=180> <img src="./images-for-README/mobile/upload-profile-pic.png" width=180>
+![](./images-for-README/desktop/profile.png)
+![](./images-for-README/desktop/home.png)
+![](./images-for-README/desktop/create-post.png)
 
 ## 🎯 Features
 
@@ -126,7 +128,7 @@ We welcome contributions from the community. To submit a pull request:
 
 ## 🔑 License
 
--   This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
 
 ## 🧑 Author
 
