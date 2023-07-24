@@ -3,7 +3,6 @@
 This is a full-stack web application that functions as a social media platform. The application includes key social media features, enabling users to create, like, and comment on posts. The aim is to provide a user-friendly and engaging platform where individuals can share their thoughts, interact with others, and stay connected. Each feature is designed with an emphasis on ease of use, promoting a seamless social media experience.
 
 <br/>
-<br/>
 
 ![](./images-for-README/SocialSpace-banner.png)
 
